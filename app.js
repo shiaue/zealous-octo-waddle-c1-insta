@@ -76,6 +76,7 @@ io.sockets.on("connection", function(socket) {
     conn = c;
     return r.table("cap")
       .orderBy({index: r.desc("time")})
+        // Retrieves most recent 20 photos
       .limit(20).run(conn)
   })
   .then(function(cursor) { return cursor.toArray(); })
