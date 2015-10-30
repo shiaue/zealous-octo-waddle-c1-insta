@@ -6,6 +6,7 @@ var sockio = require("socket.io");
 var crypto = require("crypto");
 var r = require("rethinkdb");
 var q = require("q");
+var sentiment = require("sentiment");
 
 var config = require("./config");
 
