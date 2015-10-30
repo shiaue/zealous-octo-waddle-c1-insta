@@ -64,3 +64,4 @@ dist
 #webstorm
 .idea
 ngrok
+rethinkdb_data

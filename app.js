@@ -41,12 +41,12 @@ r.connect(config.database).then(function(c) {
   return r.dbCreate(config.database.db).run(conn);
 })
 .then(function() {
-  return r.tableCreate("instacat").run(conn);
+  return r.tableCreate("cap").run(conn);
 })
 .then(function() {
   return q.all([
-    r.table("instacat").indexCreate("time").run(conn),
-    r.table("instacat").indexCreate("place", {geo: true}).run(conn)
+    r.table("cap").indexCreate("time").run(conn),
+    r.table("cap").indexCreate("place", {geo: true}).run(conn)
   ]);
 })
 .error(function(err) {
@@ -54,17 +54,18 @@ r.connect(config.database).then(function(c) {
     console.log(err);
 })
 .finally(function() {
-  r.table("instacat").changes().run(conn)
+  r.table("cap").changes().run(conn)
   .then(function(cursor) {
     cursor.each(function(err, item) {
       if (item && item.new_val)
-        io.sockets.emit("cat", item.new_val);
+        io.sockets.emit("c1", item.new_val);
     });
   })
   .error(function(err) {
     console.log("Error:", err);
   });
 
+      // Searching #capitalone
   subscribeToTag("capitalone");
 });
 
@@ -72,9 +73,9 @@ io.sockets.on("connection", function(socket) {
   var conn;
   r.connect(config.database).then(function(c) {
     conn = c;
-    return r.table("instacat")
+    return r.table("cap")
       .orderBy({index: r.desc("time")})
-      .limit(60).run(conn)
+      .limit(20).run(conn)
   })
   .then(function(cursor) { return cursor.toArray(); })
   .then(function(result) {
@@ -120,7 +121,7 @@ app.post("/publish/photo", function(req, res) {
   var conn;
   r.connect(config.database).then(function(c) {
     conn = c;
-    return r.table("instacat").insert(
+    return r.table("cap").insert(
       r.http(path)("data").merge(function(item) {
         return {
           time: r.now(),

@@ -20,18 +20,18 @@ $(document).ready(function() {
     else $("#map").show();
   });
 
-  function addCat(cat) {
-    cat.date = moment.unix(cat.created_time).format("MMM DD, h:mm a");
-    $("#cats").prepend(template(cat));
+  function addCap(cap) {
+    cap.date = moment.unix(cap.created_time).format("MMM DD, h:mm a");
+    $("#cats").prepend(template(cap));
 
-    if (cat.place) {
+    if (cap.place) {
       var count = markers.unshift(L.marker(L.latLng(
-          cat.place.coordinates[1],
-          cat.place.coordinates[0])));
+          cap.place.coordinates[1],
+          cap.place.coordinates[0])));
 
       map.addLayer(markers[0]);
       markers[0].bindPopup(
-          "<img src=\"" + cat.images.thumbnail.url + "\">",
+          "<img src=\"" + cap.images.thumbnail.url + "\">",
           {minWidth: 150, minHeight: 150});
       
       markers[0].openPopup();
@@ -43,9 +43,9 @@ $(document).ready(function() {
 
   var socket = io.connect();
   
-  socket.on("cat", addCat); 
+  socket.on("c1", addCap);
   socket.on("recent", function(data) {
-    data.reverse().forEach(addCat);
+    data.reverse().forEach(addCap);
   });
 
 });

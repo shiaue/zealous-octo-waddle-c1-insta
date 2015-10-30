@@ -1,5 +1,5 @@
 {
-  "name": "cats-of-instagram",
+  "name": "capitalone-instagram",
   "version": "0.0.1",
   "description": "A real-time Instagram cat viewer built with RethinkDB",
   "main": "app.js",
@@ -9,14 +9,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/rethinkdb/cats-of-instagram.git"
+    "url": ""
   },
-  "author": "Ryan Paul",
+  "author": "Elton",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/rethinkdb/cats-of-instagram/issues"
-  },
-  "homepage": "https://github.com/rethinkdb/cats-of-instagram",
+  "homepage": "",
   "dependencies": {
     "body-parser": "^1.9.0",
     "express": "^4.9.7",
